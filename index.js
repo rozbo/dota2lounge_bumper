@@ -48,7 +48,12 @@ let main=()=>{
         });
 }
 
+console.log("------------")
+console.log(new Date().toLocaleString());
 console.log("now ,go!");
+
+
+
 main();
 
 
