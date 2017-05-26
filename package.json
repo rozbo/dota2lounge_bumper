@@ -1,0 +1,10 @@
+{
+  "name": "d2l",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "rozbo",
+  "license": "MIT",
+  "dependencies": {
+    "superagent": "^3.5.2"
+  }
+}
