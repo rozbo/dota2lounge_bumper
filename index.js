@@ -3,7 +3,7 @@
  */
 "use strict";
 let util= require('./util');
-
+let brotli= require('brotli/decompress');
 
 let getBumpInfo=function(text){
     let regex=/bumpTrade\('([\d]+)','([\w]+)'\)/g;
@@ -14,6 +14,7 @@ let getBumpInfo=function(text){
         if(m!=null){
             bump(m[1],m[2]);
             data[m[1]]=m[2];
+            break;
         }else{
             console.log("当前所有已刷新")
             break;
@@ -39,11 +40,21 @@ let bump=(k,v)=>{
 
 
 let main=()=>{
-    util.get('https://dota2lounge.com/mytrades').end(function(err, res){
+    util.get('https://dota2lounge.com/mytrades')
+        .responseType('blob')
+        .end(function(err, res){
             if (err || !res.ok) {
                 console.log('Oh no! error');
             } else {
-                getBumpInfo(res.text);
+                let html=res.body;
+                let contentEncoding = res.headers["content-encoding"];
+                if (contentEncoding === "br") {
+                    html = brotli(html);
+                }
+                let retHtml = new Buffer(html);
+                let result=retHtml.toString();
+                console.log(result);
+                getBumpInfo(result);
             }
         });
 }
