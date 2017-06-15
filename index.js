@@ -53,7 +53,7 @@ let main=()=>{
                 }
                 let retHtml = new Buffer(html);
                 let result=retHtml.toString();
-                console.log(result);
+                //console.log(result);
                 getBumpInfo(result);
             }
         });
