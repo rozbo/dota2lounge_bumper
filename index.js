@@ -6,7 +6,7 @@ let util= require('./util');
 let brotli= require('brotli/decompress');
 
 let getBumpInfo=function(text){
-    let regex=/bumpTrade\('([\d]+)','([\w]+)'\)/g;
+    let regex=/bumpTrade\('([\d]+)','([\w]*)'\)/g;
     let data={};
     let m=null;
     while(true){
